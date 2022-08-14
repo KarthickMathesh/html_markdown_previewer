@@ -1,5 +1,5 @@
 # html_markdown_previewer
-Simple markdown previer which converys markdown inyo html based
+Simple markdown previewer which converts markdown into html based on below package
 ```js
 npm install marked
 ```
