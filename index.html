@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon"
+          href="https://cdn.glitch.com/86fdffd3-de3a-44b9-97c7-ef32b42ff40a%2Ffavicon.png?v=1625035821264"
+          type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.4/tailwind.min.css"/>
+    <title>Snippet Generator</title>
+    <style>
+		@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+		body{
+			font-family: "Poppins", sans-serif;;
+		}
+
+    </style>
+</head>
+<body class="bg-gray-800 text-gray-500 m-2 md:m-20">
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-5 md:gap-10">
+    <div class="bg-gray-100 rounded p-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
+            <div>
+                <input type="text" name="description" id="description"
+                       class="p-3 w-full focus:border-purple-700 rounded border-2 outline-none"
+                       placeholder="Description">
+            </div>
+            <div>
+                <input type="text" name="tab_trigger" id="tab_trigger"
+                       class="p-3 w-full focus:border-purple-700 rounded border-2 outline-none"
+                       placeholder="Tab Trigger">
+            </div>
+        </div>
+        <div class="mt-5">
+            <textarea name="snippet" id="snippet"
+                      class="p-3 w-full h-96 focus:border-purple-700 rounded border-2 outline-none"
+                      placeholder="Enter Your Snippets ..."></textarea>
+        </div>
+        <div>
+            <button class="mt-5 bg-gray-800 hover:bg-green-500 text-white font-bold p-2 rounded w-full md:w-40"
+                    onclick="Snippet();" id="generate"><span>Generate</span></button>
+        </div>
+    </div>
+    <div class="bg-gray-100 rounded p-5">
+        <div class="grid grid-cols-1 bg-purple-100 rounded p-5 text-base md:text-lg select-all">
+            <div></div>
+            <div>"<span class="text-green-500" id="description1"></span>" : {</div>
+            <div class="ml-5"><span class="text-purple-500">"prefix":</span> "<span class="text-red-500"
+                                                                                    id="tab_trigger1"></span>",
+            </div>
+            <div class="ml-5"><span class="text-yellow-500">"body":</span> [</div>
+            <div class="ml-5" id="snippetContent">
+                <div id="placeholder" class="ml-5">" "</div>
+            </div>
+            <div class="ml-5">],</div>
+            <div class="ml-5"><span class="text-pink-500">"description":</span> "<span class="text-green-500"
+                                                                                       id="description2"></span>"
+            </div>
+            <div>},</div>
+            <div></div>
+        </div>
+    </div>
+</div>
+<script>
+	function storeDescription() {
+		const description = document.getElementById("description").value;
+		document.getElementById("description1").innerHTML = description;
+		document.getElementById("description2").innerHTML = description;
+	}
+
+	function storePrefix() {
+		const tab_trigger = document.getElementById("tab_trigger").value;
+		document.getElementById("tab_trigger1").innerHTML = tab_trigger;
+	}
+
+	function Snippet() {
+		document.getElementById("placeholder").setAttribute('hidden', 'hidden');
+		const snippet = document.getElementById("snippet");
+		const str = snippet.value.split("\n");
+		for (i = 0; i < str.length; i++) {
+			$('#snippetContent').append('<div class="ml-5 text-blue-500 idPlace"></div>');
+			$(".idPlace").attr("id", i);
+			$(".idPlace").removeClass('idPlace');
+			if (i < str.length - 1) {
+				document.getElementById(i).innerHTML = '"' + str[i] + '"' + ',';
+			} else {
+				document.getElementById(i).innerHTML = '"' + str[i] + '"';
+			}
+		}
+		storeDescription();
+		storePrefix();
+	}
+
+</script>
+</body>
+</html>
