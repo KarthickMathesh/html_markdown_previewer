@@ -20,7 +20,7 @@
 			<div class="bg-gray-100 rounded p-5">
 					<label for="markdown">Markdown</label>
 				<div class="mt-5 flex justify-start align-top">
-					<input type="text" class="p-3 w-full h-96 focus:border-purple-700 rounded border-2 outline-none" name="markdown" id="markdown" onkeyup="handle(e)">
+					<textarea class="rounded border-2 outline-none p-3 w-full h-96 focus:border-purple-700" name="markdown" id="markdown"></textarea>
 				</div>
 				<div>
 					<button class="mt-5 bg-gray-800 hover:bg-green-500 text-white font-bold p-2 rounded w-full md:w-40" id="convert"><span>Convert</span></button>
@@ -28,8 +28,8 @@
 			</div>
 			<div class="bg-gray-100 rounded p-5">
 				<label for="preview">HTML</label>
-				<div id="preview" class="flex justify-start align-top bg-gray-100 w-full h-full">
-					<h1 id="heading-1">Heading 1</h1>
+				<div class="mt-5 flex justify-start align-top">
+					<div id="preview"></div>
 				</div>
 			</div>
 		</div>
@@ -49,7 +49,8 @@
 
 		function convert(value) {
 			const markdown = document.getElementById("markdown").value || value;
-			document.getElementById("preview").innerHTML = marked.parse(markdown);
+			const html = marked.parse(markdown);
+			document.getElementById("preview").innerHTML = html;
 		}
 	</script>
 	</body>
