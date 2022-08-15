@@ -18,21 +18,39 @@
 	<body class="bg-gray-800 text-gray-500 m-2 md:m-20">
 		<div class="grid grid-cols-1 xl:grid-cols-2 gap-5 md:gap-10">
 			<div class="bg-gray-100 rounded p-5">
-				<div class="mt-5">
-					<label for="markdown">HTML</label>
-					<textarea class="p-3 w-full h-96 focus:border-purple-700 rounded border-2 outline-none" id="markdown"
-					          name="markdown"
-					          placeholder="Enter Your Markdown ..."></textarea>
+					<label for="markdown">Markdown</label>
+				<div class="mt-5 flex justify-start align-top">
+					<input type="text" class="p-3 w-full h-96 focus:border-purple-700 rounded border-2 outline-none" name="markdown" id="markdown" onkeyup="handle(e)">
 				</div>
 				<div>
-					<button class="mt-5 bg-gray-800 hover:bg-green-500 text-white font-bold p-2 rounded w-full md:w-40" id="generate"><span>Generate</span></button>
+					<button class="mt-5 bg-gray-800 hover:bg-green-500 text-white font-bold p-2 rounded w-full md:w-40" id="convert"><span>Convert</span></button>
 				</div>
 			</div>
 			<div class="bg-gray-100 rounded p-5">
 				<label for="preview">HTML</label>
-				<div id="preview"></div>
+				<div id="preview" class="flex justify-start align-top bg-gray-100 w-full h-full">
+					<h1 id="heading-1">Heading 1</h1>
+				</div>
 			</div>
 		</div>
 		<script defer src="js/marked.min.js" type="text/javascript"></script>
+	<script>
+
+		document.addEventListener('click', function (){
+			const markdown = document.getElementById('markdown').value;
+			convert(markdown);
+		});
+
+		function handle(e) {
+			console.log(e.target.value);
+			const markdown = e.target.value !== undefined ? e.target.value : '';
+			convert(markdown);
+		}
+
+		function convert(value) {
+			const markdown = document.getElementById("markdown").value || value;
+			document.getElementById("preview").innerHTML = marked.parse(markdown);
+		}
+	</script>
 	</body>
 </html>
